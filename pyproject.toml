@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sard-subs"
+version = "0.1.0"
+description = "Bidi-safe Arabic/RTL subtitle toolkit: repair SRT/VTT text, wrap by measured width, export ASS or SRT, burn in with FFmpeg."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Majd Abdelrahim" }]
+keywords = ["subtitles", "arabic", "rtl", "bidi", "ass", "srt", "vtt", "davinci-resolve"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Multimedia :: Video",
+  "Natural Language :: Arabic",
+]
+dependencies = ["Pillow>=9.0"]
+
+[project.optional-dependencies]
+full = ["fonttools>=4.40"]
+dev = ["pytest>=8", "ruff>=0.6", "fonttools>=4.40"]
+
+[project.scripts]
+sard = "sard.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
